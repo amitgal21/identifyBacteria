@@ -1,4 +1,7 @@
 from tkinter import *
+import mysql.connector
+from tkinter import messagebox
+from DBimplention import *
 
 # window size and place
 AccountSystem = Tk()
@@ -487,7 +490,7 @@ Login_button_1 = Button(
     # command=lambda:,
     relief="flat",
     activebackground="#272A37",
-    cursor="hand2",
+    cursor="hand2", command=lambda: login_check(Login_emailName_entry.get(), Login_passwordName_entry.get())
 )
 Login_button_1.place(x=120, y=445, width=333, height=65)
 
@@ -560,16 +563,41 @@ def forgot_password():
 
     # ======= Update password Button ============
     update_pass = Button(win, fg='#f8f8f8', text='Update Password', bg='#1D90F5', font=("yu gothic ui", 12, "bold"),
-                         cursor='hand2', relief="flat", bd=0, highlightthickness=0, activebackground="#1D90F5")
+                         cursor='hand2', relief="flat", bd=0, highlightthickness=0, activebackground="#1D90F5",
+                         command=lambda: update_password())
     update_pass.place(x=40, y=260, width=256, height=45)
+
+    def exit_window():
+        win.destroy()
+
+    def update_password():
+        if email_entry3.get() == "" or new_password_entry.get() == "":
+            messagebox.showerror("Error", "All Field Are Required")
+            exit_window()
+        else:
+
+            if not check_exist(email_entry3.get()):
+                messagebox.showerror("Error", "Email dno't exist")
+                exit_window()
+            else:
+                update_password_query(email_entry3.get(), new_password_entry.get())
+                messagebox.showinfo("Congrats", "Password changed successfully")
+                exit_window()
+
 
 
 AccountSystem.resizable(False, False)
 AccountSystem.mainloop()
+
 # ===================================================
 # ===================LOGIN SQL=======================
 # ===================================================
+# Variable of LOGIN
+# Login_emailName_entry,Login_passwordName_entry
+# forgotPassword, email_entry3,new_password_entry,switchSignup
 
+
+# Connect to MySQL database
 
 # ===================================================
 # ===================SIGNUP SQL=======================
