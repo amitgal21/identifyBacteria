@@ -5,6 +5,7 @@ import accountGUI
 
 global mycursor, mydb
 
+
 # check if the details are illegal and then if its legal he goes to the next view
 def login_check(Login_emailName_entry, Login_passwordName_entry):
     if Login_emailName_entry == "" or Login_passwordName_entry == "":
@@ -23,6 +24,7 @@ def login_check(Login_emailName_entry, Login_passwordName_entry):
         else:
             messagebox.showerror('Error', "Invalid email or password")
 
+
 # forgot password QUERY to update the new password
 def update_password_query(mail, new_password):
     global mycursor, mydb
@@ -39,6 +41,7 @@ def update_password_query(mail, new_password):
         mycursor.close()
         mydb.close()
 
+
 # this for forgot password to check if the details are legal
 def check_exist(mail):
     global mycursor, mydb
@@ -54,3 +57,18 @@ def check_exist(mail):
     return False
 
 
+def sign_up_query(firstName, lastName, mail, password):
+    global mycursor, mydb
+    try:
+        mydb = mysql.connector.connect(host="localhost", user="root", password="Shitrit1!", database="final_project_db")
+        mycursor = mydb.cursor()
+        # Update password
+        query = "INSERT INTO final_project_db.users (mail, password, name, lastname) VALUES (%s, %s, %s, %s)"
+        mycursor.execute(query, (mail, password, firstName, lastName))
+        mydb.commit()
+
+    except mysql.connector.Error as error:
+        messagebox.showerror("Error", "Failed to update password: {error}")
+    finally:
+        mycursor.close()
+        mydb.close()

@@ -1,7 +1,6 @@
 from tkinter import *
-import mysql.connector
 from tkinter import messagebox
-from DBimplention import *
+from AccountGUIQUERY import *
 
 # window size and place
 AccountSystem = Tk()
@@ -301,9 +300,35 @@ submit_button = Button(
     highlightthickness=0,
     relief="flat",
     activebackground="#272A37",
-    cursor="hand2",
+    cursor="hand2", command=lambda: sign_up_func()
 )
 submit_button.place(x=130, y=460, width=333, height=65)
+
+
+def sign_up_func():
+    if firstName_entry.get() == "" or lastName_entry.get() == "" or emailName_entry.get() == "" or passwordName_entry.get() == "" or confirm_passwordName_entry.get() == "":
+        messagebox.showerror("Error", "All Field Are Required")
+    else:
+        if passwordName_entry.get() != confirm_passwordName_entry.get():
+            messagebox.showerror("Error", "Password Are Not Match")
+        else:
+            if check_exist(emailName_entry.get()):
+                messagebox.showerror("Error", "Email Already exist")
+            else:
+                sign_up_query(firstName_entry.get(), lastName_entry.get(), emailName_entry.get(),
+                              passwordName_entry.get())
+                messagebox.showinfo("Congrats", "Your Sign Up Complete Please Login")
+                clear()
+                show_frame(sign_in)
+
+
+def clear():
+    firstName_entry.delete(0, END)
+    lastName_entry.delete(0, END)
+    emailName_entry.delete(0, END)
+    passwordName_entry.delete(0, END)
+    confirm_passwordName_entry.delete(0, END)
+
 
 # ================ Header Text Down ====================
 headerText_image_down = PhotoImage(file="assets\\headerText_image.png")
@@ -585,20 +610,5 @@ def forgot_password():
                 exit_window()
 
 
-
 AccountSystem.resizable(False, False)
 AccountSystem.mainloop()
-
-# ===================================================
-# ===================LOGIN SQL=======================
-# ===================================================
-# Variable of LOGIN
-# Login_emailName_entry,Login_passwordName_entry
-# forgotPassword, email_entry3,new_password_entry,switchSignup
-
-
-# Connect to MySQL database
-
-# ===================================================
-# ===================SIGNUP SQL=======================
-# ===================================================
