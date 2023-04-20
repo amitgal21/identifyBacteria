@@ -1,6 +1,6 @@
 from tkinter import messagebox
 import mysql.connector
-
+import globalsVar
 import accountGUI
 
 global mycursor, mydb
@@ -8,21 +8,17 @@ global mycursor, mydb
 
 # check if the details are illegal and then if its legal he goes to the next view
 def login_check(Login_emailName_entry, Login_passwordName_entry):
-    if Login_emailName_entry == "" or Login_passwordName_entry == "":
-        messagebox.showerror('Error', 'All Fields Required')
+    mydb = mysql.connector.connect(host="localhost", user="root", password="Shitrit1!", database="final_project_db")
+    # Check login field
+    mycursor = mydb.cursor()
+    mycursor.execute("SELECT * FROM users WHERE mail = %s AND password = %s",
+                     (Login_emailName_entry, Login_passwordName_entry))
+    result = mycursor.fetchone()
+    if result:
+        globalsVar.mail_from_login = Login_emailName_entry
+        return True
     else:
-        mydb = mysql.connector.connect(host="localhost", user="root", password="Shitrit1!",
-                                       database="final_project_db")
-
-        # Check login field
-        mycursor = mydb.cursor()
-        mycursor.execute("SELECT * FROM users WHERE mail = %s AND password = %s",
-                         (Login_emailName_entry, Login_passwordName_entry))
-        result = mycursor.fetchone()
-        if result:
-            messagebox.showinfo('Successful', 'Login is successful')
-        else:
-            messagebox.showerror('Error', "Invalid email or password")
+        return False
 
 
 # forgot password QUERY to update the new password

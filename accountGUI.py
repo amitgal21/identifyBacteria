@@ -1,3 +1,4 @@
+import globalsVar
 from tkinter import *
 from tkinter import messagebox
 from AccountGUIQUERY import *
@@ -515,9 +516,23 @@ Login_button_1 = Button(
     # command=lambda:,
     relief="flat",
     activebackground="#272A37",
-    cursor="hand2", command=lambda: login_check(Login_emailName_entry.get(), Login_passwordName_entry.get())
-)
+    cursor="hand2", command=lambda: login_func())
+
 Login_button_1.place(x=120, y=445, width=333, height=65)
+
+
+def login_func():
+    if Login_emailName_entry == "" or Login_passwordName_entry == "":
+        messagebox.showerror('Error', 'All Fields Required')
+    else:
+        if login_check(Login_emailName_entry.get(), Login_passwordName_entry.get()):
+            messagebox.showinfo('Successful', 'Login is successful')
+            AccountSystem.destroy()
+            import UserScreen
+
+        else:
+            messagebox.showerror("Error", "Invaild Mail Or Password")
+
 
 # ================ Header Text Down ====================
 Login_headerText_image_down = PhotoImage(file="assets\\headerText_image.png")
