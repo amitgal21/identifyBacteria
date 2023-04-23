@@ -16,6 +16,11 @@ def login_check(Login_emailName_entry, Login_passwordName_entry):
     result = mycursor.fetchone()
     if result:
         globalsVar.mail_from_login = Login_emailName_entry
+        globalsVar.password_global = Login_passwordName_entry
+        globalsVar.country_global = result[4]
+        globalsVar.city_global = result[5]
+        globalsVar.age_global = result[6]
+        globalsVar.field_global = result[7]
         return True
     else:
         return False

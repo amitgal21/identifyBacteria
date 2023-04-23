@@ -4,6 +4,9 @@ from tkinter import messagebox
 from UserScreenQuery import *
 
 
+global aboutusPage_header
+
+
 # ================================================================
 # =========================Functional Part========================
 # ================================================================
@@ -16,6 +19,15 @@ def user_details():
 def About_us_screen_delete():
     from aboutus_Func import clear_screen
     clear_screen()
+    aboutusPage_header.destroy()
+    new_header = Label(
+        bg_image,
+        text=globalsVar.Current_User_Screen,
+        fg="#FFFFFF",
+        font=("yu gothic ui Bold", 24 * -1),
+        bg="#272A37"
+    )
+    new_header.place(x=75, y=100)
     # ================ Header Text Left ====================
     headerText_image_lef2 = PhotoImage(file="assets\\headerText_image.png")
     headerText_image_label3 = Label(
@@ -56,7 +68,7 @@ def About_us_screen_delete():
     # ================ CREATE #3 HEADER ====================
     createAccount_header2 = Label(
         bg_image,
-        text="What You Want To Do",
+        text="What You Want To Do?",
         fg="#FFFFFF",
         font=("yu gothic ui Bold", 24 * -1),
         bg="#272A37"
@@ -80,7 +92,7 @@ def Change_Page_Color(page):
     globalsVar.Current_User_Screen = page
 
 
-# user_details()
+user_details()
 window = Tk()
 
 height = 650
@@ -205,6 +217,17 @@ details.place(x=130, y=301, width=200, height=50)
 def details_func():
     Change_Page_Color('Your Details')
     details.config(fg="#2596be")
+    det_header = Label(
+        bg_image,
+        text="YOUR PRIVATE DETAILS",
+        fg="#FFFFFF",
+        font=("yu gothic ui Bold", 24 * -1),
+        bg="#272A37"
+    )
+    det_header.place(x=75, y=100)
+    from YourDetailsScreen import put_details_on_screen
+    put_details_on_screen(window)
+
 
 
 # ===================under Line=========================
@@ -226,8 +249,21 @@ underline.place(x=130, y=403, height=1, width=200)
 
 
 def aboutus_func():
+    global aboutusPage_header
     Change_Page_Color('About Us')
     aboutus.config(fg="#2596be")
+    # destroy the old "What You Want To Do" header label
+    createAccount_header.destroy()
+
+    # create a new label for the "HOME PAGE" header
+    aboutusPage_header = Label(
+        bg_image,
+        text="ABOUT US",
+        fg="#FFFFFF",
+        font=("yu gothic ui Bold", 24 * -1),
+        bg="#272A37"
+    )
+    aboutusPage_header.place(x=75, y=100)
     from aboutus_Func import put_text_on_screen
     put_text_on_screen(window)
 
