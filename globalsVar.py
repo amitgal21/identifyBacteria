@@ -8,12 +8,15 @@ mail_from_login = "Amit@ee"
 private_Name_global = "Amit"
 last_name_global = "Shitrit"
 password_global = "123"
-country_global = ""
-city_global = ""
-age_global = ""
-field_global = ""
-
+country_global = " "
+city_global = " "
+age_global = " "
+field_global = " "
 
 # ======== here we knew who is the current screen in User Page
 Current_User_Screen = "Home Page"
 
+# ========= first time flag for initali user screen to home page
+
+first_time = True
+first_time_2 = True

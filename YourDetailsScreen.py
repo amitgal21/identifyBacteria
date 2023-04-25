@@ -1,9 +1,7 @@
 from tkinter import *
-from PIL import Image, ImageTk
-import globalsVar
-from yourdetailsQuery import *
+from queryFiles.yourdetailsQuery import *
 
-global text1, text2, text3, text4, text5, text6, text7, text8, text9
+global text1, text2, text3, text4, text5, text6, text7, text8, text9, update_pass
 global mail, password, firstname, lastname, country, city, age, field
 
 
@@ -11,7 +9,7 @@ global mail, password, firstname, lastname, country, city, age, field
 
 
 def put_details_on_screen(window):
-    global text1, text2, text3, text4, text5, text6, text7, text8, text9
+    global text1, text2, text3, text4, text5, text6, text7, text8, text9, update_pass
     text1 = Label(
         window,
         anchor="nw",
@@ -61,48 +59,60 @@ def put_details_on_screen(window):
         bg="#272A37"
     )
     text5.place(x=750, y=200)
-
+    if globalsVar.country_global is not None:
+        country_text = "Country: " + globalsVar.country_global
+    else:
+        country_text = "Country: Unknown"
     text6 = Label(
         window,
         anchor="nw",
-        text="Country: " + globalsVar.country_global,
+        text=country_text,
         fg="#FFFFFF",
         font=("yu gothic ui Bold", 18 * -1),
         bg="#272A37"
     )
     text6.place(x=750, y=250)
-
+    if globalsVar.country_global is not None:
+        city_text2 = "City: " + globalsVar.city_global
+    else:
+        city_text2 = "City: Unknown"
     text7 = Label(
         window,
         anchor="nw",
-        text="City: " + globalsVar.city_global,
+        text=city_text2,
         fg="#FFFFFF",
         font=("yu gothic ui Bold", 18 * -1),
         bg="#272A37"
     )
     text7.place(x=750, y=300)
-
+    if globalsVar.country_global is not None:
+        age_text3 = "Age: " + globalsVar.age_global
+    else:
+        age_text3 = "Age: Unknown"
     text8 = Label(
         window,
         anchor="nw",
-        text="Age: " + globalsVar.age_global,
+        text=age_text3,
         fg="#FFFFFF",
         font=("yu gothic ui Bold", 18 * -1),
         bg="#272A37"
     )
     text8.place(x=750, y=350)
-
+    if globalsVar.country_global is not None:
+        field_text3 = "Professional field: " + globalsVar.field_global
+    else:
+        field_text3 = "Professional field: Unknown"
     text9 = Label(
         window,
         anchor="nw",
-        text="Professional field: " + globalsVar.field_global,
+        text=field_text3,
         fg="#FFFFFF",
         font=("yu gothic ui Bold", 18 * -1),
         bg="#272A37"
     )
     text9.place(x=750, y=400)
     # ======= Update password Button ============
-    update_pass = Button(window, fg='#f8f8f8', text='Update Password', bg='#1D90F5', font=("yu gothic ui", 12, "bold"),
+    update_pass = Button(window, fg='#f8f8f8', text='Change Details', bg='#1D90F5', font=("yu gothic ui", 12, "bold"),
                          cursor='hand2', relief="flat", bd=0, highlightthickness=0, activebackground="#1D90F5",
                          command=lambda: want_update_details())
     update_pass.place(x=500, y=500, width=256, height=45)
@@ -214,7 +224,31 @@ def want_update_details():
 
 def change_details_inDB(win):
     # make update query
-    send_to_db(globalsVar.mail_from_login, password.get(), firstname.get(), lastname.get(), country.get(), city.get(), age.get(), field.get())
+    send_to_db(globalsVar.mail_from_login, password.get(), firstname.get(), lastname.get(), country.get(), city.get(),
+               age.get(), field.get())
+    # update the new detials in details screen
+    globalsVar.age_global = age.get()
+    globalsVar.field_global = field.get()
+    globalsVar.city_global = city.get()
+    globalsVar.password_global = password.get()
+    globalsVar.private_Name_global = firstname.get()
+    globalsVar.last_name_global = lastname.get()
+    globalsVar.country_global = country.get()
     messagebox.showinfo("Congrats", "Your Details has been Updated")
-
     win.destroy()
+    from UserScreen import home_func
+    home_func()
+
+
+# @@@@@ clean the screen when we leave details screen
+def clear_details_screen():
+    text1.destroy()
+    text2.destroy()
+    text3.destroy()
+    text4.destroy()
+    text5.destroy()
+    text6.destroy()
+    text7.destroy()
+    text8.destroy()
+    text9.destroy()
+    update_pass.destroy()

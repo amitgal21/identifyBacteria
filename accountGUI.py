@@ -1,7 +1,5 @@
-import globalsVar
 from tkinter import *
-from tkinter import messagebox
-from AccountGUIQUERY import *
+from queryFiles.AccountGUIQUERY import *
 
 # window size and place
 AccountSystem = Tk()
