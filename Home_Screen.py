@@ -18,7 +18,7 @@ def init_home_page(window):
     image1_button.image = image1  # Keep a reference to the image.
     image1_button.place(x=400, y=150, width=400, height=136)
 
-
+#stay here
 def show_article(window):
     toplevel = Toplevel(window)
     toplevel.title('Article')
