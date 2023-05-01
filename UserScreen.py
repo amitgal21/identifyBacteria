@@ -91,6 +91,7 @@ Home = Button(text="Home Page", fg="#3D404B",
               activebackground="#272A37",
               activeforeground="#ffffff",
               cursor="hand2", command=lambda: home_func())
+""""""
 Home.place(x=130, y=200, width=200, height=50)
 
 # ===================under Line=========================
@@ -184,9 +185,11 @@ def delete_old_page(old_page, new_page):
         if globalsVar.first_time_2:
             createAccount_header.destroy()
             globalsVar.first_time_2 = False
+            home_clean_func()
         else:
             home_header.destroy()
             bring_back_details(new_page)
+            home_clean_func()
     elif old_page == "Diagnosis Page":
         diag_clean_screen()
         bring_back_details(new_page)
@@ -214,6 +217,12 @@ def home_func():
     home_header.place(x=75, y=100)
     from Home_Screen import init_home_page
     init_home_page(window)
+
+
+def home_clean_func():
+    from Home_Screen import clear_screen
+    clear_screen()
+
 
 # ==================== diagnose screen part ============================================
 

@@ -20,3 +20,8 @@ Current_User_Screen = "Home Page"
 
 first_time = True
 first_time_2 = True
+
+itsClick1 = 0
+itsClick2 = 0
+itsClick3 = 0
+itsClick4 = 0

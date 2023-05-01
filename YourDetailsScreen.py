@@ -216,10 +216,18 @@ def want_update_details():
     password.insert(0, globalsVar.password_global)
     firstname.insert(0, globalsVar.private_Name_global)
     lastname.insert(0, globalsVar.last_name_global)
-    country.insert(0, globalsVar.country_global)
+    if globalsVar.country_global is not None:
+        country.insert(0, globalsVar.country_global)
+    if globalsVar.city_global is not None:
+        city.insert(0, globalsVar.city_global)
+    if globalsVar.age_global is not None:
+        age.insert(0, globalsVar.age_global)
+    if globalsVar.field_global is not None:
+        field.insert(0, globalsVar.field_global)
+    '''country.insert(0, globalsVar.country_global)
     city.insert(0, globalsVar.city_global)
     age.insert(0, globalsVar.age_global)
-    field.insert(0, globalsVar.field_global)
+    field.insert(0, globalsVar.field_global)'''
 
 
 def change_details_inDB(win):
