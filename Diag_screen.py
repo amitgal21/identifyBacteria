@@ -80,7 +80,6 @@ def start_Screen(window):
     image1_button.image = image1  # Keep a reference to the image.
     image1_button.place(x=500, y=470, width=333, height=65)
 
-
 # ==================== are you sure screen for button in diagnose screen in user ==================
 def func1(window):
     from areUsure import areUsurefunc

@@ -25,3 +25,8 @@ itsClick1 = 0
 itsClick2 = 0
 itsClick3 = 0
 itsClick4 = 0
+
+
+path_image1="1.png"
+path_image2="2.png"
+path_image3="3.png"
