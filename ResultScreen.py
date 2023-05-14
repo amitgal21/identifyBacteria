@@ -61,7 +61,6 @@ create_text("Bacteria Type: ", 500, 210)
 create_text("Accuracy: ", 500, 260)
 create_text("Treatment recommendations: ", 500, 310)
 
-
 # ============================ Separate The Screen ===============================
 # ===================MIDDLE lINE =========================
 underline = Frame(window, bg="white", highlightthickness=0)
@@ -120,7 +119,7 @@ if globalsVar.path_image3 != "":
 
 # Create a matplotlib figure with blue background
 fig = plt.figure(figsize=(3, 3), facecolor='#272A37')
-s=[80, 5, 5, 8, 2]
+s = [80, 5, 5, 8, 2]
 l = ["Cocci", "Bacilli", "Spirilla", "Vibrio's", "Spirochaetes"]
 plt.pie(s, labels=l)
 
@@ -133,8 +132,5 @@ canvas.draw()
 
 # Position the canvas on the screen
 canvas.get_tk_widget().place(x=150, y=150)
-
-
-
 
 window.mainloop()
